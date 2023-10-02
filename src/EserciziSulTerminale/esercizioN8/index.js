@@ -12,20 +12,29 @@ function luckyDraw(player) {
     });
   }
   
-  async function getResults() {
-    try {
-      const resultTina = await luckyDraw('Tina');
-      console.log(resultTina);
-  
-      const resultJorge = await luckyDraw('Jorge');
-      console.log(resultJorge);
-  
-      const resultJulien = await luckyDraw('Julien');
-      console.log(resultJulien);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-  
-  getResults();
+  luckyDraw('Joe')
+    .then((risultato) => {
+      console.log(risultato);
+    })
+    .catch((errore) => {
+      console.error(errore.message);
+    })
+    .then(() => {
+      return luckyDraw('Caroline');
+    })
+    .then((risultato) => {
+      console.log(risultato);
+    })
+    .catch((errore) => {
+      console.error(errore.message);
+    })
+    .then(() => {
+      return luckyDraw('Sabrina');
+    })
+    .then((risultato) => {
+      console.log(risultato);
+    })
+    .catch((errore) => {
+      console.error(errore.message);
+    });
   

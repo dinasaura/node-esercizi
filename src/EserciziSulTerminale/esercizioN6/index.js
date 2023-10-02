@@ -1,11 +1,12 @@
-import fs from 'fs';
+import figlet from 'figlet';
 
-const contenuto = 'Ciao, Node.js!';
+const textToArt = 'Hello, Figlet!';
 
-fs.writeFile('output.txt', contenuto, 'utf8', (err) => {
+figlet(textToArt, function (err, data) {
   if (err) {
-    console.error('Errore durante la scrittura del file:', err);
-  } else {
-    console.log('File scritto con successo!');
+    console.log('Something went wrong...');
+    console.dir(err);
+    return;
   }
+  console.log(data);
 });

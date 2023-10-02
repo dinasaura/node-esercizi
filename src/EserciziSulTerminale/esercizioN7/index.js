@@ -1,40 +1,11 @@
-function luckyDraw(player) {
-    return new Promise((resolve, reject) => {
-      const win = Boolean(Math.round(Math.random()));
-  
-      process.nextTick(() => {
-        if (win) {
-          resolve(`${player} ha vinto un premio`);
-        } else {
-          reject(new Error(`${player} ha perso`));
-        }
-      });
-    });
+import fs from 'fs';
+
+const contenuto = 'Ciao, Node.js!';
+
+fs.writeFile('output.txt', contenuto, 'utf8', (err) => {
+  if (err) {
+    console.error('Errore durante la scrittura del file:', err);
+  } else {
+    console.log('File scritto con successo!');
   }
-  
-  luckyDraw('Joe')
-    .then((risultato) => {
-      console.log(risultato);
-    })
-    .catch((errore) => {
-      console.error(errore.message);
-    })
-    .then(() => {
-      return luckyDraw('Caroline');
-    })
-    .then((risultato) => {
-      console.log(risultato);
-    })
-    .catch((errore) => {
-      console.error(errore.message);
-    })
-    .then(() => {
-      return luckyDraw('Sabrina');
-    })
-    .then((risultato) => {
-      console.log(risultato);
-    })
-    .catch((errore) => {
-      console.error(errore.message);
-    });
-  
+});
