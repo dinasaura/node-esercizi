@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "composite": true,
     "skipLibCheck": true,
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
+    "module": "commonjs",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "allowJs": true  
   },
   "include": ["vite.config.ts"]
 }
+
