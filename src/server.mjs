@@ -1,19 +1,31 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import * as planetsController from './planets.mjs';
+import db from './db.mjs';
 
 const app = express();
-const port = 3005;
+const port = 3006;
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-// routes
-app.get('/api/planets', planetsController.getAll);
-app.get('/api/planets/:id', planetsController.getOneById);
-app.post('/api/planets', planetsController.create);
-app.put('/api/planets/:id', planetsController.updateById);
-app.delete('/api/planets/:id', planetsController.deleteById);
+app.get('/planets', (req, res) => {
+  db.any('SELECT * FROM planets;').then(data => {
+    res.json(data);
+  }).catch(error => {
+    console.error('error', error);
+    res.status(500).send('Server Error');
+  });
+});
+
+
+app.post('/planets', (req, res) => {
+  const planetName = req.body.name;
+  db.none('INSERT INTO planets (name) VALUES ($1);', planetName).then(() => {
+    res.send('added');
+  }).catch(error => {
+    console.error('error planet:', error);
+    res.status(500).send('Server Error');
+  });
+});
 
 app.listen(port, () => {
-  console.log(`in esecuzione ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
